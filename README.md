@@ -11,6 +11,26 @@ Dette er en simpel CEP-extension til Illustrator. Den laver en QR-kode ud fra te
 
 ## Installation
 
+Download `com.rj.qrcodeillustrator.zip` fra GitHub release-siden.
+
+Pak zip-filen ud, og læg mappen `com.rj.qrcodeillustrator` her:
+
+`~/Library/Application Support/Adobe/CEP/extensions/`
+
+Den færdige sti skal være:
+
+`~/Library/Application Support/Adobe/CEP/extensions/com.rj.qrcodeillustrator`
+
+Tillad unsigned CEP-extensions på macOS:
+
+`defaults write com.adobe.CSXS.11 PlayerDebugMode 1`
+
+Hvis panelet ikke dukker op i en nyere Illustrator-version, gentag for den relevante CSXS-version, fx `com.adobe.CSXS.12`, `com.adobe.CSXS.13` eller `com.adobe.CSXS.14`.
+
+Genstart Illustrator, og åbn panelet via `Window > Extensions > QR Code Generator`.
+
+## Installation fra source
+
 Kør:
 
 `./install-macos.sh`
@@ -19,7 +39,7 @@ Genstart derefter Illustrator, og åbn panelet via `Window > Extensions > QR Cod
 
 Manuelt kan du gøre det samme sådan:
 
-1. Kopier mappen `qr-code-generator` til:
+1. Kopier projektmappens indhold til:
 
    `~/Library/Application Support/Adobe/CEP/extensions/com.rj.qrcodeillustrator`
 
@@ -53,7 +73,7 @@ Kør:
 
 `npm run package`
 
-Det laver et zip-arkiv i `dist/`, som kan uploades til en GitHub release.
+Det laver `dist/com.rj.qrcodeillustrator.zip`, som kan uploades til en GitHub release. Når brugeren pakker den ud, får de den korrekte pluginmappe direkte.
 
 ## Tredjepart
 
