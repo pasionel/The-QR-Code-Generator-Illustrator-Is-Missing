@@ -56,7 +56,7 @@
     try {
       lastMatrix = createMatrix(text);
       drawPreview(lastMatrix);
-      status.textContent = lastMatrix.length + " x " + lastMatrix.length + " moduler";
+      status.textContent = lastMatrix.length + " x " + lastMatrix.length + " modules";
     } catch (error) {
       lastMatrix = null;
       insertButton.disabled = true;
@@ -91,10 +91,10 @@
     var script = "QRInserter.insert('" + rows + "', " + MODULE_SIZE_POINTS + ")";
 
     insertButton.disabled = true;
-    status.textContent = "Indsætter...";
+    status.textContent = "Inserting...";
     cs.evalScript(script, function (result) {
       insertButton.disabled = false;
-      status.textContent = result || "QR-koden er indsat.";
+      status.textContent = result || "The QR code was inserted.";
     });
   }
 

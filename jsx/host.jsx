@@ -2,7 +2,7 @@ var QRInserter = QRInserter || {};
 
 QRInserter.insert = function (matrixText, moduleSize) {
   if (app.documents.length === 0) {
-    return "Åbn et Illustrator-dokument først.";
+    return "Open an Illustrator document first.";
   }
 
   var doc = app.activeDocument;
@@ -43,5 +43,5 @@ QRInserter.insert = function (matrixText, moduleSize) {
   doc.selection = null;
   group.selected = true;
   app.redraw();
-  return "QR-koden er indsat som vektor.";
+  return "The QR code was inserted as vector artwork.";
 };

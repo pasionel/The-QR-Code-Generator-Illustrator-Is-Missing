@@ -12,4 +12,4 @@ for version in 11 12 13 14; do
   defaults write "com.adobe.CSXS.$version" PlayerDebugMode 1
 done
 
-echo "Installeret. Genstart Illustrator, og åbn Window > Extensions > QR Code Generator."
+echo "Installed. Restart Illustrator, then open Window > Extensions > QR Code Generator."

@@ -1,84 +1,84 @@
-# QR Code Generator til Adobe Illustrator
+# QR Code Generator for Adobe Illustrator
 
-Dette er en simpel CEP-extension til Illustrator. Den laver en QR-kode ud fra tekst eller en URL og indsætter den i det aktive Illustrator-dokument som vektor-firkanter.
+This is a simple CEP extension for Adobe Illustrator. It generates a QR code from text or a URL and inserts it into the active Illustrator document as vector rectangles.
 
-## Funktioner
+## Features
 
-- Genererer QR-koder fra tekst eller URL.
-- Indsætter QR-koden i det aktive Illustrator-dokument.
-- Tegner kun de sorte QR-felter som vektorobjekter.
-- Ingen API-kald og ingen eksterne runtime-afhængigheder.
+- Generates QR codes from text or URLs.
+- Inserts the QR code into the active Illustrator document.
+- Draws only the black QR modules as vector artwork.
+- Makes no API calls and has no external runtime dependencies.
 
 ## Installation
 
-Download `com.rj.qrcodeillustrator.zip` fra GitHub release-siden.
+Download `com.rj.qrcodeillustrator.zip` from the GitHub release page.
 
-Pak zip-filen ud, og læg mappen `com.rj.qrcodeillustrator` her:
+Unzip it and place the `com.rj.qrcodeillustrator` folder here:
 
 `~/Library/Application Support/Adobe/CEP/extensions/`
 
-Den færdige sti skal være:
+The final path should be:
 
 `~/Library/Application Support/Adobe/CEP/extensions/com.rj.qrcodeillustrator`
 
-Tillad unsigned CEP-extensions på macOS:
+Enable unsigned CEP extensions on macOS:
 
 `defaults write com.adobe.CSXS.11 PlayerDebugMode 1`
 
-Hvis panelet ikke dukker op i en nyere Illustrator-version, gentag for den relevante CSXS-version, fx `com.adobe.CSXS.12`, `com.adobe.CSXS.13` eller `com.adobe.CSXS.14`.
+If the panel does not appear in a newer Illustrator version, repeat the command for the relevant CSXS version, for example `com.adobe.CSXS.12`, `com.adobe.CSXS.13`, or `com.adobe.CSXS.14`.
 
-Genstart Illustrator, og åbn panelet via `Window > Extensions > QR Code Generator`.
+Restart Illustrator, then open the panel from `Window > Extensions > QR Code Generator`.
 
-## Installation fra source
+## Installation From Source
 
-Kør:
+Run:
 
 `./install-macos.sh`
 
-Genstart derefter Illustrator, og åbn panelet via `Window > Extensions > QR Code Generator`.
+Restart Illustrator, then open the panel from `Window > Extensions > QR Code Generator`.
 
-Manuelt kan du gøre det samme sådan:
+Manual installation does the same thing:
 
-1. Kopier projektmappens indhold til:
+1. Copy the project contents to:
 
    `~/Library/Application Support/Adobe/CEP/extensions/com.rj.qrcodeillustrator`
 
-2. Tillad unsigned CEP-extensions på macOS:
+2. Enable unsigned CEP extensions on macOS:
 
    `defaults write com.adobe.CSXS.11 PlayerDebugMode 1`
 
-   Hvis panelet ikke dukker op i en nyere Illustrator-version, gentag for den relevante CSXS-version, fx `com.adobe.CSXS.12`, `com.adobe.CSXS.13` eller `com.adobe.CSXS.14`.
+   If the panel does not appear in a newer Illustrator version, repeat the command for the relevant CSXS version, for example `com.adobe.CSXS.12`, `com.adobe.CSXS.13`, or `com.adobe.CSXS.14`.
 
-3. Genstart Illustrator.
+3. Restart Illustrator.
 
-4. Åbn panelet via `Window > Extensions > QR Code Generator`.
+4. Open the panel from `Window > Extensions > QR Code Generator`.
 
-## Brug
+## Usage
 
-1. Åbn eller opret et Illustrator-dokument.
-2. Skriv tekst eller en URL i panelet.
-3. Klik `Indsæt QR-kode`.
+1. Open or create an Illustrator document.
+2. Enter text or a URL in the panel.
+3. Click `Insert QR Code`.
 
-QR-koden placeres midt på den aktive artboard og bliver markeret som én gruppe. Plugin'et tegner kun de sorte QR-felter; baggrund og kontrast styres i Illustrator-dokumentet.
+The QR code is placed in the center of the active artboard and selected as one group. The plugin draws only the black QR modules; background and contrast are controlled in the Illustrator document.
 
-## Begrænsninger
+## Limitations
 
-- QR-generatoren er med vilje holdt simpel og bruger fejlkorrektion M.
-- Meget lange tekster kan afvises i panelet.
-- Dette er ikke UXP. Illustrator har ikke en stabil, offentlig UXP-pluginmodel til samme type tredjeparts-panel, så CEP er den mest praktiske løsning her.
+- The generator intentionally keeps the setup simple and uses error correction level M.
+- Very long text can be rejected by the panel.
+- This is not UXP. Illustrator does not currently provide the same stable public UXP plugin model for this kind of third-party panel, so CEP is the practical option here.
 
-## Pakke til release
+## Release Package
 
-Kør:
+Run:
 
 `npm run package`
 
-Det laver `dist/com.rj.qrcodeillustrator.zip`, som kan uploades til en GitHub release. Når brugeren pakker den ud, får de den korrekte pluginmappe direkte.
+This creates `dist/com.rj.qrcodeillustrator.zip`, which can be uploaded to a GitHub release. When users unzip it, they get the correctly named plugin folder directly.
 
-## Tredjepart
+## Third-party
 
-- `lib/qrcode-generator.js` er vendored fra `qrcode-generator` og bruges under MIT-licens. Se `THIRD_PARTY_NOTICES.md`.
+- `lib/qrcode-generator.js` is vendored from `qrcode-generator` and used under the MIT license. See `THIRD_PARTY_NOTICES.md`.
 
-## Licens
+## License
 
 MIT
