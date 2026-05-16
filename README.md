@@ -13,9 +13,21 @@ This is a simple CEP extension for Adobe Illustrator. It generates a QR code fro
 
 ## Installation
 
-Download `com.rj.qrcodeillustrator.zip` from the GitHub release page.
+Download `QR-Code-Generator-Illustrator-mac.zip` from the GitHub release page.
 
-Unzip it and place the `com.rj.qrcodeillustrator` folder here:
+Unzip it, then double-click `install.command`.
+
+The installer copies the extension to:
+
+`~/Library/Application Support/Adobe/CEP/extensions/com.rj.qrcodeillustrator`
+
+It also enables unsigned CEP extensions for the common Adobe CSXS versions.
+
+Restart Illustrator, then open the panel from `Window > Extensions > QR Code Generator`.
+
+### Manual Installation
+
+If you do not want to use the installer, download `com.rj.qrcodeillustrator.zip`, unzip it, and place the `com.rj.qrcodeillustrator` folder here:
 
 `~/Library/Application Support/Adobe/CEP/extensions/`
 
@@ -26,8 +38,6 @@ The final path should be:
 Enable unsigned CEP extensions on macOS:
 
 `defaults write com.adobe.CSXS.11 PlayerDebugMode 1`
-
-If the panel does not appear in a newer Illustrator version, repeat the command for the relevant CSXS version, for example `com.adobe.CSXS.12`, `com.adobe.CSXS.13`, or `com.adobe.CSXS.14`.
 
 Restart Illustrator, then open the panel from `Window > Extensions > QR Code Generator`.
 
@@ -64,7 +74,7 @@ Manual installation does the same thing:
 
 The QR code is placed in the center of the active artboard and selected as one group. The plugin draws only the black QR modules; background and contrast are controlled in the Illustrator document.
 
-QR codes are built as one compound path with connected horizontal module runs, which avoids the usual cleanup step of handling hundreds of separate square objects.
+QR codes are built as compound vector artwork from traced module outlines, which avoids the usual cleanup step of handling hundreds of separate square objects.
 
 ## Limitations
 
@@ -79,7 +89,10 @@ Run:
 
 `npm run package`
 
-This creates `dist/com.rj.qrcodeillustrator.zip`, which can be uploaded to a GitHub release. When users unzip it, they get the correctly named plugin folder directly.
+This creates two zip files in `dist/`:
+
+- `QR-Code-Generator-Illustrator-mac.zip`: recommended user package with `install.command`.
+- `com.rj.qrcodeillustrator.zip`: direct extension-folder package for manual installation.
 
 ## Third-party
 

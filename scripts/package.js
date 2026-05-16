@@ -6,8 +6,12 @@ const root = path.resolve(__dirname, "..");
 const dist = path.join(root, "dist");
 const stagingRoot = path.join(dist, "staging");
 const extensionName = "com.rj.qrcodeillustrator";
+const installerName = "QR-Code-Generator-Illustrator-mac";
 const stagingExtension = path.join(stagingRoot, extensionName);
 const zipPath = path.join(dist, `${extensionName}.zip`);
+const installerRoot = path.join(stagingRoot, installerName);
+const installerExtension = path.join(installerRoot, extensionName);
+const installerZipPath = path.join(dist, `${installerName}.zip`);
 
 const include = [
   "CSXS",
@@ -40,15 +44,25 @@ function copyRecursive(source, target) {
 
 fs.rmSync(dist, { recursive: true, force: true });
 fs.mkdirSync(stagingExtension, { recursive: true });
+fs.mkdirSync(installerExtension, { recursive: true });
 
 for (const item of include) {
   copyRecursive(path.join(root, item), path.join(stagingExtension, item));
+  copyRecursive(path.join(root, item), path.join(installerExtension, item));
 }
+
+copyRecursive(path.join(root, "install.command"), path.join(installerRoot, "install.command"));
 
 execFileSync("zip", ["-qr", zipPath, extensionName], {
   cwd: stagingRoot,
   stdio: "inherit"
 });
 
+execFileSync("zip", ["-qr", installerZipPath, installerName], {
+  cwd: stagingRoot,
+  stdio: "inherit"
+});
+
 fs.rmSync(stagingRoot, { recursive: true, force: true });
 console.log(`Created ${zipPath}`);
+console.log(`Created ${installerZipPath}`);
