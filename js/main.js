@@ -52,15 +52,56 @@
       row.forEach(function (cell, x) {
         if (cell) {
           if (style === "circles") {
-            ctx.beginPath();
-            ctx.arc(offset + x * scale + scale / 2, offset + y * scale + scale / 2, scale * 0.42, 0, Math.PI * 2);
-            ctx.fill();
+            if (!isFinderModule(x, y, count)) {
+              drawDot(ctx, offset + x * scale + scale / 2, offset + y * scale + scale / 2, scale * 0.42);
+            }
           } else {
             ctx.fillRect(offset + x * scale, offset + y * scale, scale, scale);
           }
         }
       });
     });
+
+    if (style === "circles") {
+      drawFinderTarget(ctx, offset, offset, scale);
+      drawFinderTarget(ctx, offset + (count - 7) * scale, offset, scale);
+      drawFinderTarget(ctx, offset, offset + (count - 7) * scale, scale);
+    }
+  }
+
+  function drawDot(ctx, centerX, centerY, radius) {
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function drawFinderTarget(ctx, x, y, scale) {
+    var centerX = x + scale * 3.5;
+    var centerY = y + scale * 3.5;
+
+    ctx.save();
+    ctx.strokeStyle = "#111";
+    ctx.lineWidth = scale * 0.9;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, scale * 2.55, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.lineWidth = scale * 0.8;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, scale * 1.25, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.fillStyle = "#111";
+    drawDot(ctx, centerX, centerY, scale * 0.82);
+    ctx.restore();
+  }
+
+  function isFinderModule(x, y, count) {
+    var inTop = y < 7;
+    var inLeft = x < 7;
+    var inRight = x >= count - 7;
+    var inBottom = y >= count - 7;
+    return (inTop && inLeft) || (inTop && inRight) || (inBottom && inLeft);
   }
 
   function escapeVCard(value) {
