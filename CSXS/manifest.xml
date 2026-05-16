@@ -32,11 +32,11 @@
           <Menu>QR Code Generator</Menu>
           <Geometry>
             <Size>
-              <Height>520</Height>
+              <Height>680</Height>
               <Width>360</Width>
             </Size>
             <MinSize>
-              <Height>420</Height>
+              <Height>360</Height>
               <Width>320</Width>
             </MinSize>
           </Geometry>
