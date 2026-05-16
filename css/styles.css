@@ -95,7 +95,8 @@ body {
 }
 
 textarea,
-input {
+input,
+select {
   width: 100%;
   border: 1px solid #4a4a4a;
   border-radius: 5px;
@@ -111,18 +112,55 @@ textarea {
   padding: 10px;
 }
 
-input {
+.codePreview {
+  min-height: 104px;
+  font-family: Menlo, Consolas, monospace;
+  font-size: 11px;
+  line-height: 1.35;
+  color: #dcdcdc;
+}
+
+input,
+select {
   height: 32px;
   padding: 0 8px;
 }
 
 textarea:focus,
-input:focus {
+input:focus,
+select:focus {
   border-color: #7da7ff;
 }
 
+.optionsGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 9px;
+  align-items: end;
+}
+
+.checkField {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  padding: 0 9px;
+  border: 1px solid #4a4a4a;
+  border-radius: 5px;
+  background: #1c1c1c;
+  color: #d8d8d8;
+  font-size: 12px;
+}
+
+.checkField input {
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
 @media (max-width: 340px) {
-  .vcardGrid {
+  .vcardGrid,
+  .optionsGrid {
     grid-template-columns: 1fr;
   }
 
@@ -159,6 +197,21 @@ button {
 button:disabled {
   cursor: default;
   opacity: .55;
+}
+
+.linkButton {
+  min-height: 0;
+  align-self: center;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #8eb5ff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.linkButton:disabled {
+  color: #777;
 }
 
 #status {

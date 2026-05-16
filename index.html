@@ -50,13 +50,38 @@
             <label class="field"><span>Country</span><input id="country" type="text"></label>
           </div>
         </div>
+
+        <label class="field">
+          <span>vCard data</span>
+          <textarea id="vcardPreview" class="codePreview" rows="6" readonly></textarea>
+        </label>
       </section>
+
+      <div class="optionsGrid">
+        <label class="field">
+          <span>Error correction</span>
+          <select id="errorCorrection">
+            <option value="M" selected>Medium</option>
+            <option value="Q">Quartile</option>
+            <option value="H">High</option>
+          </select>
+        </label>
+        <label class="checkField">
+          <input id="useActiveFill" type="checkbox">
+          <span>Use active fill color</span>
+        </label>
+        <label class="field">
+          <span>Output size (<span id="outputUnitLabel">pt</span>)</span>
+          <input id="outputSize" type="number" min="5" max="1000" step="1" value="50">
+        </label>
+      </div>
 
       <div class="previewWrap">
         <canvas id="preview" width="220" height="220" aria-label="QR preview"></canvas>
       </div>
 
       <button id="insertButton" type="button">Insert QR Code</button>
+      <button id="insertNewButton" class="linkButton" type="button">Insert in new document</button>
       <p id="status" role="status"></p>
     </main>
 

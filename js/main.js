@@ -7,13 +7,19 @@
   var textPanel = document.getElementById("textPanel");
   var vcardPanel = document.getElementById("vcardPanel");
   var textInput = document.getElementById("qrText");
+  var vcardPreview = document.getElementById("vcardPreview");
+  var errorCorrectionInput = document.getElementById("errorCorrection");
+  var useActiveFillInput = document.getElementById("useActiveFill");
+  var outputSizeInput = document.getElementById("outputSize");
+  var outputUnitLabel = document.getElementById("outputUnitLabel");
   var insertButton = document.getElementById("insertButton");
+  var insertNewButton = document.getElementById("insertNewButton");
   var status = document.getElementById("status");
   var preview = document.getElementById("preview");
   var vcardInputs = Array.prototype.slice.call(document.querySelectorAll("#vcardPanel input"));
   var lastMatrix = null;
   var activeMode = "text";
-  var MODULE_SIZE_POINTS = 4;
+  var currentUnit = "pt";
 
   function escapeForExtendScript(value) {
     return String(value)
@@ -27,6 +33,34 @@
     return matrix.map(function (row) {
       return row.map(function (cell) { return cell ? "1" : "0"; }).join("");
     }).join("\n");
+  }
+
+  function points(value, unit) {
+    var number = Number(value);
+    if (!isFinite(number) || number <= 0) {
+      number = 50;
+    }
+    if (unit === "mm") return number * 72 / 25.4;
+    if (unit === "cm") return number * 72 / 2.54;
+    if (unit === "in") return number * 72;
+    if (unit === "pc") return number * 12;
+    return number;
+  }
+
+  function setInsertDisabled(disabled) {
+    insertButton.disabled = disabled;
+    insertNewButton.disabled = disabled;
+  }
+
+  function refreshDocumentUnit() {
+    cs.evalScript("QRInserter.getRulerUnit()", function (result) {
+      var unit = result || "pt";
+      if (!/^(px|pt|pc|in|mm|cm)$/.test(unit)) {
+        unit = "pt";
+      }
+      currentUnit = unit;
+      outputUnitLabel.textContent = unit;
+    });
   }
 
   function drawPreview(matrix) {
@@ -93,6 +127,10 @@
     return lines.join("\n");
   }
 
+  function updateVCardPreview() {
+    vcardPreview.value = buildVCard();
+  }
+
   function getQRText() {
     if (activeMode === "vcard") {
       var hasValue = vcardInputs.some(function (input) {
@@ -104,8 +142,9 @@
   }
 
   function updatePreview() {
+    updateVCardPreview();
     var text = getQRText();
-    insertButton.disabled = !text;
+    setInsertDisabled(!text);
 
     if (!text) {
       lastMatrix = null;
@@ -120,13 +159,13 @@
       status.textContent = lastMatrix.length + " x " + lastMatrix.length + " modules";
     } catch (error) {
       lastMatrix = null;
-      insertButton.disabled = true;
+      setInsertDisabled(true);
       status.textContent = error.message;
     }
   }
 
   function createMatrix(text) {
-    var qr = qrcode(0, "M");
+    var qr = qrcode(0, errorCorrectionInput.value);
     qr.addData(text);
     qr.make();
 
@@ -141,7 +180,7 @@
     return matrix;
   }
 
-  function insertQRCode() {
+  function insertQRCode(createNewDocument) {
     var text = getQRText();
     if (!text || !lastMatrix) {
       updatePreview();
@@ -149,13 +188,17 @@
     }
 
     var rows = escapeForExtendScript(matrixToRows(lastMatrix));
-    var script = "QRInserter.insert('" + rows + "', " + MODULE_SIZE_POINTS + ")";
+    var useActiveFill = useActiveFillInput.checked ? "true" : "false";
+    var moduleSize = points(outputSizeInput.value, currentUnit) / lastMatrix.length;
+    var action = createNewDocument ? "insertNew" : "insert";
+    var script = "QRInserter." + action + "('" + rows + "', " + moduleSize + ", " + useActiveFill + ")";
 
-    insertButton.disabled = true;
+    setInsertDisabled(true);
     status.textContent = "Inserting...";
     cs.evalScript(script, function (result) {
-      insertButton.disabled = false;
+      setInsertDisabled(false);
       status.textContent = result || "The QR code was inserted.";
+      refreshDocumentUnit();
     });
   }
 
@@ -174,10 +217,14 @@
   textTab.addEventListener("click", function () { activateMode("text"); });
   vcardTab.addEventListener("click", function () { activateMode("vcard"); });
   textInput.addEventListener("input", updatePreview);
+  errorCorrectionInput.addEventListener("change", updatePreview);
+  outputSizeInput.addEventListener("input", updatePreview);
   vcardInputs.forEach(function (input) {
     input.addEventListener("input", updatePreview);
   });
-  insertButton.addEventListener("click", insertQRCode);
+  insertButton.addEventListener("click", function () { insertQRCode(false); });
+  insertNewButton.addEventListener("click", function () { insertQRCode(true); });
 
+  refreshDocumentUnit();
   updatePreview();
 }());
