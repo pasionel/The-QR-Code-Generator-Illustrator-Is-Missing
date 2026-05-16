@@ -21,18 +21,35 @@
       </section>
 
       <section id="vcardPanel" class="tabPanel" role="tabpanel" aria-labelledby="vcardTab">
-        <label class="field"><span>First name</span><input id="firstName" type="text"></label>
-        <label class="field"><span>Last name</span><input id="lastName" type="text"></label>
-        <label class="field"><span>Organization</span><input id="organization" type="text"></label>
-        <label class="field"><span>Title</span><input id="jobTitle" type="text"></label>
-        <label class="field"><span>Phone</span><input id="phone" type="tel"></label>
-        <label class="field"><span>Email</span><input id="email" type="email"></label>
-        <label class="field"><span>Website</span><input id="website" type="url"></label>
-        <label class="field"><span>Street</span><input id="street" type="text"></label>
-        <label class="field"><span>City</span><input id="city" type="text"></label>
-        <label class="field"><span>Region</span><input id="region" type="text"></label>
-        <label class="field"><span>Postal code</span><input id="postalCode" type="text"></label>
-        <label class="field"><span>Country</span><input id="country" type="text"></label>
+        <div class="vcardGroup">
+          <div class="groupTitle">Name</div>
+          <div class="vcardGrid">
+            <label class="field"><span>First name</span><input id="firstName" type="text"></label>
+            <label class="field"><span>Last name</span><input id="lastName" type="text"></label>
+            <label class="field"><span>Organization</span><input id="organization" type="text"></label>
+            <label class="field"><span>Title</span><input id="jobTitle" type="text"></label>
+          </div>
+        </div>
+
+        <div class="vcardGroup">
+          <div class="groupTitle">Contact</div>
+          <div class="vcardGrid">
+            <label class="field"><span>Phone</span><input id="phone" type="tel"></label>
+            <label class="field"><span>Email</span><input id="email" type="email"></label>
+            <label class="field wide"><span>Website</span><input id="website" type="url"></label>
+          </div>
+        </div>
+
+        <div class="vcardGroup">
+          <div class="groupTitle">Address</div>
+          <div class="vcardGrid">
+            <label class="field wide"><span>Street</span><input id="street" type="text"></label>
+            <label class="field"><span>City</span><input id="city" type="text"></label>
+            <label class="field"><span>Region</span><input id="region" type="text"></label>
+            <label class="field"><span>Postal code</span><input id="postalCode" type="text"></label>
+            <label class="field"><span>Country</span><input id="country" type="text"></label>
+          </div>
+        </div>
       </section>
 
       <div class="previewWrap">

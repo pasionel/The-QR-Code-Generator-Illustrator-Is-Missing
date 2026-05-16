@@ -53,9 +53,35 @@ body {
 }
 
 #vcardPanel {
-  max-height: 210px;
+  max-height: 236px;
   overflow: auto;
-  padding-right: 4px;
+  padding-right: 5px;
+}
+
+.vcardGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid #3b3b3b;
+  border-radius: 6px;
+  background: #202020;
+}
+
+.groupTitle {
+  color: #f0f0f0;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.vcardGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 9px;
+}
+
+.vcardGrid .wide {
+  grid-column: 1 / -1;
 }
 
 .field {
@@ -91,6 +117,16 @@ input {
 textarea:focus,
 input:focus {
   border-color: #7da7ff;
+}
+
+@media (max-width: 340px) {
+  .vcardGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .vcardGrid .wide {
+    grid-column: auto;
+  }
 }
 
 .previewWrap {
