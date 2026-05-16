@@ -5,8 +5,11 @@ This is a simple CEP extension for Adobe Illustrator. It generates a QR code fro
 ## Features
 
 - Generates QR codes from text or URLs.
+- Generates vCard QR codes from separate contact fields.
 - Inserts the QR code into the active Illustrator document.
+- Supports square and circle QR module styles.
 - Draws only the black QR modules as vector artwork.
+- Square QR codes are inserted as a single compound vector object instead of many separate small rectangles.
 - Makes no API calls and has no external runtime dependencies.
 
 ## Installation
@@ -56,15 +59,20 @@ Manual installation does the same thing:
 ## Usage
 
 1. Open or create an Illustrator document.
-2. Enter text or a URL in the panel.
-3. Click `Insert QR Code`.
+2. Choose `Text` or `vCard`.
+3. Enter the QR content.
+4. Choose `Squares` or `Circles`.
+5. Click `Insert QR Code`.
 
 The QR code is placed in the center of the active artboard and selected as one group. The plugin draws only the black QR modules; background and contrast are controlled in the Illustrator document.
+
+Square QR codes are built as one compound path with connected horizontal module runs, which avoids the usual cleanup step of handling hundreds of separate square objects. Circle QR codes are intentionally inserted as individual circle paths inside one selected group, because merging circles would change the visual style.
 
 ## Limitations
 
 - The generator intentionally keeps the setup simple and uses error correction level M.
 - Very long text can be rejected by the panel.
+- vCards are generated as vCard 3.0 data with common contact fields.
 - This is not UXP. Illustrator does not currently provide the same stable public UXP plugin model for this kind of third-party panel, so CEP is the practical option here.
 
 ## Release Package

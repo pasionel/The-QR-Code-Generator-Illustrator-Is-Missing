@@ -17,9 +17,45 @@ body {
 .panel {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   min-height: 100vh;
   padding: 16px;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.tab {
+  min-height: 30px;
+  border: 1px solid #4a4a4a;
+  background: #1c1c1c;
+  color: #d8d8d8;
+  font-weight: 600;
+}
+
+.tab.active {
+  border-color: #2f7df6;
+  background: #2f7df6;
+  color: #fff;
+}
+
+.tabPanel {
+  display: none;
+}
+
+.tabPanel.active {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#vcardPanel {
+  max-height: 210px;
+  overflow: auto;
+  padding-right: 4px;
 }
 
 .field {
@@ -55,6 +91,25 @@ input {
 textarea:focus,
 input:focus {
   border-color: #7da7ff;
+}
+
+.styleControl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 12px;
+  color: #d8d8d8;
+}
+
+.styleControl label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  padding: 0 9px;
+  border: 1px solid #4a4a4a;
+  border-radius: 5px;
+  background: #1c1c1c;
 }
 
 .previewWrap {

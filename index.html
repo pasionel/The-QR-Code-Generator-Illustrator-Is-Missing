@@ -8,10 +8,37 @@
   </head>
   <body>
     <main class="panel">
-      <label class="field">
-        <span>Text or URL</span>
-        <textarea id="qrText" rows="7" placeholder="https://example.com"></textarea>
-      </label>
+      <div class="tabs" role="tablist" aria-label="QR content type">
+        <button id="textTab" class="tab active" type="button" role="tab" aria-selected="true" aria-controls="textPanel">Text</button>
+        <button id="vcardTab" class="tab" type="button" role="tab" aria-selected="false" aria-controls="vcardPanel">vCard</button>
+      </div>
+
+      <section id="textPanel" class="tabPanel active" role="tabpanel" aria-labelledby="textTab">
+        <label class="field">
+          <span>Text or URL</span>
+          <textarea id="qrText" rows="6" placeholder="https://example.com"></textarea>
+        </label>
+      </section>
+
+      <section id="vcardPanel" class="tabPanel" role="tabpanel" aria-labelledby="vcardTab">
+        <label class="field"><span>First name</span><input id="firstName" type="text"></label>
+        <label class="field"><span>Last name</span><input id="lastName" type="text"></label>
+        <label class="field"><span>Organization</span><input id="organization" type="text"></label>
+        <label class="field"><span>Title</span><input id="jobTitle" type="text"></label>
+        <label class="field"><span>Phone</span><input id="phone" type="tel"></label>
+        <label class="field"><span>Email</span><input id="email" type="email"></label>
+        <label class="field"><span>Website</span><input id="website" type="url"></label>
+        <label class="field"><span>Street</span><input id="street" type="text"></label>
+        <label class="field"><span>City</span><input id="city" type="text"></label>
+        <label class="field"><span>Region</span><input id="region" type="text"></label>
+        <label class="field"><span>Postal code</span><input id="postalCode" type="text"></label>
+        <label class="field"><span>Country</span><input id="country" type="text"></label>
+      </section>
+
+      <div class="styleControl" aria-label="QR style">
+        <label><input type="radio" name="qrStyle" value="squares" checked> Squares</label>
+        <label><input type="radio" name="qrStyle" value="circles"> Circles</label>
+      </div>
 
       <div class="previewWrap">
         <canvas id="preview" width="220" height="220" aria-label="QR preview"></canvas>
